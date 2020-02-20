@@ -1,0 +1,9 @@
+{
+  "folder": "--name",
+  "files": [
+    {
+      "file": "--name.tsx",
+      "template": "../templates/ButtonComponent.js"
+    }
+  ]
+}
