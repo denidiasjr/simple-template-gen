@@ -3,11 +3,11 @@
   "files": [
     {
       "file": "--name.tsx",
-      "template": "./templates/ButtonComponent.js"
+      "template": "./tests/templates/ButtonComponent.js"
     },
     {
       "file": "--name.stories.tsx",
-      "template": "./templates/ButtonStories.js"
+      "template": "./tests/templates/ButtonStories.js"
     },
     {
       "file": "--name.test.tsx"

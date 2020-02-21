@@ -1,0 +1,82 @@
+[
+  {
+    "folder": "Backend",
+    "files": [
+      {
+        "file": "Locolibs.java"
+      },
+      {
+        "file": "Locolibs.php"
+      },
+      {
+        "file": "Locolibs.cs"
+      }
+    ]
+  },
+  {
+    "folder": "Front End",
+    "files": [
+      {
+        "file": "Locolibs.js"
+      },
+      {
+        "file": "Locolibs.ts"
+      },
+      {
+        "file": "Locolibs.css"
+      }
+    ]
+  },
+  {
+    "folder": "Others",
+    "files": [
+      {
+        "folder": "DevOps",
+        "files": [
+          {
+            "file": "Locolibs.go"
+          },
+          {
+            "file": "Locolibs.docker"
+          },
+          {
+            "folder": "Vagrant",
+            "files": [
+              {
+                "file": "Testing.vg"
+              },
+              {
+                "file": "Genius.vg"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "folder": "DevOps",
+        "files": [
+          {
+            "file": "Locolibs.go"
+          },
+          {
+            "file": "Locolibs.docker"
+          },
+          {
+            "folder": "Vagrant",
+            "files": [
+              {
+                "file": "Testing.vg"
+              },
+              {
+                "file": "Genius.vg"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "Locolibs.css"
+      }
+    ]
+  }
+]
