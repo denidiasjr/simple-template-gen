@@ -19,7 +19,7 @@ function cli(args) {
 
   // Read and create structure
   const jsonStructure = Array.isArray(configFile) ? configFile : [configFile];
-  const outputPath = path.resolve(templateArgs.output);
+  const outputPath = path.resolve(templateArgs.output || '.');
   jsonStructure.forEach(structure => createStructure(outputPath, structure))
 }
 
