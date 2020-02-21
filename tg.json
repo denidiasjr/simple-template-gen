@@ -4,6 +4,24 @@
     {
       "file": "--name.tsx",
       "template": "./templates/ButtonComponent.js"
+    },
+    {
+      "file": "--name.stories.tsx",
+      "template": "./templates/ButtonStories.js"
+    },
+    {
+      "file": "--name.test.tsx"
+    },
+    {
+      "folder": "Just a Test",
+      "files": [
+        {
+          "file": "Something.txt"
+        },
+        {
+          "file": "OtherSomething.txt"
+        }
+      ]
     }
   ]
 }
