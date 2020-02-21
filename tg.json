@@ -3,7 +3,7 @@
   "files": [
     {
       "file": "--name.tsx",
-      "template": "../templates/ButtonComponent.js"
+      "template": "./templates/ButtonComponent.js"
     }
   ]
 }
