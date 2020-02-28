@@ -1,11 +1,13 @@
 const minimist = require('minimist');
 const fs = require('fs');
 const path = require('path');
+let variables;
 
 function cli(args) {
 
   // Read template arguments
   const templateArgs = minimist(args.slice(2));
+  variables = templateArgs;
 
   // Read JSON file   
   const configPath = path.resolve(templateArgs.config);
@@ -23,10 +25,16 @@ function cli(args) {
   jsonStructure.forEach(structure => createStructure(outputPath, structure))
 }
 
+function convertName(name, variables) {
+  return Object.entries(variables).reduce((accum, [key, value]) => accum.replace(`--${key}`, value), name);
+}
+
 function createStructure(outputPath, jsonStructure) {
 
   if (jsonStructure.folder) {
-    const newFolderPath = path.join(outputPath, jsonStructure.folder);
+
+    const folderName = convertName(jsonStructure.folder, variables);
+    const newFolderPath = path.join(outputPath, folderName);
     if (!fs.existsSync(newFolderPath)) {
       fs.mkdirSync(newFolderPath);
     }
@@ -63,7 +71,8 @@ function createFiles(outputPath, files) {
         fileContent = template();
       }
 
-      const outputFile = path.join(outputPath, file.file);
+      const fileName = convertName(file.file, variables);
+      const outputFile = path.join(outputPath, fileName);
       fs.writeFileSync(outputFile, fileContent);
     }
   });
