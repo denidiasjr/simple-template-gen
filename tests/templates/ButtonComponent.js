@@ -2,9 +2,9 @@ module.exports = (props) => (
   `
 import React from 'react'
 
-function Test = (props) => {
-  return null;
+function ${props.name} = (props) => {
+  return <${props.name} />
 }
 
-export default Test;
+export default ${props.name};
 `)

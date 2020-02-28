@@ -68,7 +68,7 @@ function createFiles(outputPath, files) {
       if (file.template) {
         const templatePath = path.resolve(file.template);
         const template = require(templatePath);
-        fileContent = template();
+        fileContent = template(variables);
       }
 
       const fileName = convertName(file.file, variables);
