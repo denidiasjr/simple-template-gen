@@ -1,30 +1,26 @@
 {
-  "name": "template-gen",
+  "name": "simple-template-gen",
   "version": "0.1.0",
   "description": "A template generator for everyone!",
   "main": "bin/template-gen",
   "bin": {
-    "template-gen": "./bin/template-gen"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "simple-template-gen": "./bin/simple-template-gen"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/denidiasjr/template-gen.git"
+    "url": "git+https://github.com/denidiasjr/simple-template-gen.git"
   },
   "keywords": [
     "cli",
-    "template-gen"
+    "simple-template-gen"
   ],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/denidiasjr/template-gen/issues"
+    "url": "https://github.com/denidiasjr/simple-template-gen/issues"
   },
-  "homepage": "https://github.com/denidiasjr/template-gen#readme",
+  "homepage": "https://github.com/denidiasjr/simple-template-gen#readme",
   "dependencies": {
-    "esm": "^3.2.25",
     "minimist": "^1.2.0"
   }
 }
