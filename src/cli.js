@@ -1,27 +1,41 @@
 const minimist = require('minimist');
 const fs = require('fs');
 const path = require('path');
+const {
+  HELP_MESSAGE,
+  NO_CONFIG_ARG
+} = require('./messages')
 let variables;
 
 function cli(args) {
 
   // Read template arguments
-  const templateArgs = minimist(args.slice(2));
-  variables = templateArgs;
+  const cliArgs = minimist(args.slice(2));
+  variables = cliArgs;
+
+  // Show help message
+  if (cliArgs.help) {
+    return console.log(HELP_MESSAGE);
+  }
+
+  // If there is no --config argument, show error
+  if (!cliArgs.config) {
+    return console.log(NO_CONFIG_ARG)
+  }
 
   // Read JSON file   
-  const configPath = path.resolve(templateArgs.config);
+  const configPath = path.resolve(cliArgs.config);
 
   let configFile;
   try {
     configFile = JSON.parse(fs.readFileSync(configPath));
   } catch (err) {
-    return console.log(err.message);
+    return console.log(`ERROR: ${err.message}`);
   }
 
   // Read and create structure
   const jsonStructure = Array.isArray(configFile) ? configFile : [configFile];
-  const outputPath = path.resolve(templateArgs.output || '.');
+  const outputPath = path.resolve(cliArgs.output || '.');
   jsonStructure.forEach(structure => createStructure(outputPath, structure))
 }
 

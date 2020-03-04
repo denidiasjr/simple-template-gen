@@ -1,0 +1,82 @@
+[
+  {
+    "folder": "Backend",
+    "files": [
+      {
+        "file": "File.java"
+      },
+      {
+        "file": "File.php"
+      },
+      {
+        "file": "File.cs"
+      }
+    ]
+  },
+  {
+    "folder": "Front End",
+    "files": [
+      {
+        "file": "File.js"
+      },
+      {
+        "file": "File.ts"
+      },
+      {
+        "file": "File.css"
+      }
+    ]
+  },
+  {
+    "folder": "Others",
+    "files": [
+      {
+        "folder": "DevOps",
+        "files": [
+          {
+            "file": "File.go"
+          },
+          {
+            "file": "File.docker"
+          },
+          {
+            "folder": "Vagrant",
+            "files": [
+              {
+                "file": "Testing.vg"
+              },
+              {
+                "file": "Genius.vg"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "folder": "DevOps",
+        "files": [
+          {
+            "file": "File.go"
+          },
+          {
+            "file": "File.docker"
+          },
+          {
+            "folder": "Vagrant",
+            "files": [
+              {
+                "file": "Testing.vg"
+              },
+              {
+                "file": "Genius.vg"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "File.css"
+      }
+    ]
+  }
+]

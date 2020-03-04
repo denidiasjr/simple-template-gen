@@ -1,0 +1,27 @@
+{
+  "folder": "--name",
+  "files": [
+    {
+      "file": "--name.jsx",
+      "template": "./examples/templates/ReactComponent.js"
+    },
+    {
+      "file": "--name.md",
+      "template": "./examples/templates/ReadmeComponent.js"
+    },
+    {
+      "file": "--name.test.js"
+    },
+    {
+      "folder": "Just a Test",
+      "files": [
+        {
+          "file": "Something.txt"
+        },
+        {
+          "file": "OtherSomething.txt"
+        }
+      ]
+    }
+  ]
+}
