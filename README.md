@@ -11,6 +11,7 @@ simple-template-gen
   - [Creating config file](#creating-config-file)
   - [Inserting variables](#inserting-variables)
   - [Using variables on config file](#using-variables-on-config-file)
+  - [Using variables on template](#using-variables-on-template)
 
 
 ## Getting Started
@@ -129,6 +130,10 @@ simple-template-gen --config config.json --name MyComponent --type Sometype
 
 The other way is to create a JSON file and describe the variables on it, as you can see below:
 
+```
+simple-template-gen --config config.json --variables variables.json
+```
+
 ```json
 // variables.json
 
@@ -137,9 +142,7 @@ The other way is to create a JSON file and describe the variables on it, as you 
   "type": "Sometype"
 }
 ```
-```
-simple-template-gen --config config.json --variables variables.json
-```
+
 
 ## Using variables on config file
 
@@ -171,10 +174,56 @@ This config file will generate the following folder structure:
 MyComponent/
 ├── MyComponent.js (filled by template)
 ├── MyComponent.md
-├── Documents/
-│   ├── Document1.txt
-│   └── Document2.txt
 ```
 
 So as described on the example, to use your variables on config file you need to set a `--` prefix to indicate that it is a variable set as command argument. In this case, we set `name` and `type` variables, that could be used on config file using `--name` and `--type`.
 
+## Using variables on template
+
+Initially, we just set our template as a file which its content will be inserted on a certain file. Now with the variables feature, you can create a JS function on a file a use these variables to generate a customizable template, as you can see below.
+
+```
+simple-template-gen --config config.json --name MyComponent --packageName some-package
+```
+
+```json
+// config.json
+
+{
+  "file": "--name.js",
+  "template": "./folder/to/TemplateFile.js"
+}
+```
+
+
+```js
+// TemplateFile.js
+
+module.exports = (variables) => (
+  `
+import React from 'react'
+import content from '${variables.packageName}'
+
+const ${variables.name} = (props) => {
+  return <${variables.name} />
+}
+
+export default ${variables.name};
+`)
+
+```
+
+This example will generate the following file:
+
+```js
+// MyComponent.js
+
+import React from 'react'
+import content from 'some-package'
+
+const MyComponent = (props) => {
+  return <MyComponent />
+}
+
+export default MyComponent;
+```
