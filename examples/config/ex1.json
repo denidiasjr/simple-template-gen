@@ -16,7 +16,8 @@
       "folder": "Just a Test",
       "files": [
         {
-          "file": "Something.txt"
+          "file": "Something.txt",
+          "template": "./examples/templates/LoremIpsum.txt"
         },
         {
           "file": "OtherSomething.txt"

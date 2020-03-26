@@ -77,19 +77,36 @@ function createFiles(outputPath, files) {
 
     if (file.file) {
 
-      let fileContent = '';
-
-      if (file.template) {
-        const templatePath = path.resolve(file.template);
-        const template = require(templatePath);
-        fileContent = template(variables);
-      }
+      const fileContent = getTemplate(file.template);
 
       const fileName = convertName(file.file, variables);
       const outputFile = path.join(outputPath, fileName);
       fs.writeFileSync(outputFile, fileContent);
     }
   });
+}
+
+function getTemplate(templateFolder) {
+
+  if (!templateFolder) {
+    return '';
+  }
+
+  const templatePath = path.resolve(templateFolder);
+  let template;
+
+  try {
+    template = require(templatePath);
+
+    if (typeof template === 'function') {
+      template = template(variables);
+    }
+
+  } catch (err) {
+    template = fs.readFileSync(templatePath);
+  }
+
+  return template;
 }
 
 module.exports = cli;
