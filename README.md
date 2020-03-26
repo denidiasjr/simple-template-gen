@@ -10,6 +10,7 @@ simple-template-gen
   - [Getting Started](#getting-started)
   - [Creating config file](#creating-config-file)
   - [Inserting variables](#inserting-variables)
+  - [Using variables on config file](#using-variables-on-config-file)
 
 
 ## Getting Started
@@ -118,9 +119,7 @@ FolderC/
 
 ## Inserting variables
 
-In this section will be described how to insert variables into exported files and config file.
-
-To set the variables that you want to apply on files, you can pass them in two ways:
+In this section will be described how to insert variables into exported files and config file. To set the variables that you want to apply on files, you can pass them in two ways:
 
 The first way, you can set the variable through command line, using the `--` prefix before each one, as any other argument:
 
@@ -141,3 +140,41 @@ The other way is to create a JSON file and describe the variables on it, as you 
 ```
 simple-template-gen --config config.json --variables variables.json
 ```
+
+## Using variables on config file
+
+After inserting the variables as arguments of our command, you can use them to generate your files and inside your templates.
+
+In the example below, you can see how it can be used on the config file, using the variables set on the last section:
+
+```json
+// config.json
+
+
+{
+  "folder": "--name",
+  "files": [
+    {
+      "file": "--name.js",
+      "template": "./folder/to/MyComponentTemplate.txt"
+    },
+    {
+      "file": "--name.md",
+    },
+  ]
+}
+``` 
+
+This config file will generate the following folder structure:
+
+```
+MyComponent/
+├── MyComponent.js (filled by template)
+├── MyComponent.md
+├── Documents/
+│   ├── Document1.txt
+│   └── Document2.txt
+```
+
+So as described on the example, to use your variables on config file you need to set a `--` prefix to indicate that it is a variable set as command argument. In this case, we set `name` and `type` variables, that could be used on config file using `--name` and `--type`.
+
