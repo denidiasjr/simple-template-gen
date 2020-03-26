@@ -34,5 +34,84 @@ simple-template-gen --config config.json --output path/to/folder
 
 ## Creating config file
 
-TODO
+The config file is a JSON where the user define how the files will be exported and set the template for them. You can have more examples on `examples/config` folder. 
+
+This is an example of it:
+
+```json
+{
+  "folder": "MyComponent",
+  "files": [
+    {
+      "file": "MyComponent.js",
+      "template": "./folder/to/MyComponentTemplate.js"
+    },
+    {
+      "file": "MyComponent.md",
+    },
+    {
+      "folder": "Documents",
+      "files": [
+        {
+          "file": "Document1.txt"
+        },
+        {
+          "file": "Document2.txt"
+        }
+      ]
+    }
+  ]
+}
+```
+
+This config file will generate the following folder structure:
+
+```
+MyComponent/
+├── MyComponent.js (filled by template)
+├── MyComponent.md
+├── Documents/
+│   ├── Document1.txt
+│   └── Document2.txt
+```
+
+You can create a config file as a array to generate any folders you want on output path
+
+```json
+[
+  {
+    "folder": "FolderA",
+    "files": [
+      {
+        "file": "File1.txt"
+      },
+      {
+        "file": "File2.txt"
+      },
+    ]
+  },
+  {
+    "folder": "FolderB",
+    "files": [
+      {
+        "file": "File3.txt"
+      },
+    ]
+  },
+  {
+    "folder": "FolderC"
+  }
+]
+```
+
+This config file will generate the following folder structure:
+
+```
+FolderA/
+├── File1.txt
+├── File2.txt
+FolderB/
+├── File3.txt
+FolderC/
+```
 
