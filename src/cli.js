@@ -11,7 +11,7 @@ function cli(args) {
 
   // Read template arguments
   const cliArgs = minimist(args.slice(2));
-  variables = cliArgs;
+  variables = getVariables(cliArgs);
 
   // Show help message
   if (cliArgs.help) {
@@ -107,6 +107,20 @@ function getTemplate(templateFolder) {
   }
 
   return template;
+}
+
+function getVariables(cliArgs) {
+
+  if (!cliArgs.variables) {
+    return cliArgs;
+  }
+
+  try {
+    return JSON.parse(fs.readFileSync(cliArgs.variables));
+  } catch (err) {
+    console.log(`WARNING: ${err.message}`);
+    return cliArgs
+  }
 }
 
 module.exports = cli;

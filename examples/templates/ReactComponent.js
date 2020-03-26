@@ -1,10 +1,11 @@
-module.exports = (props) => (
+module.exports = (variables) => (
   `
-import React from 'react'
+import React from 'react';
+import content from '${variables.package}';
 
-const ${props.name} = (props) => {
-  return <${props.name} />
+const ${variables.name} = (props) => {
+  return <${variables.name} />
 }
 
-export default ${props.name};
+export default ${variables.name};
 `)
