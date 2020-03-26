@@ -9,6 +9,7 @@ simple-template-gen
 
   - [Getting Started](#getting-started)
   - [Creating config file](#creating-config-file)
+  - [Inserting variables](#inserting-variables)
 
 
 ## Getting Started
@@ -44,7 +45,7 @@ This is an example of it:
   "files": [
     {
       "file": "MyComponent.js",
-      "template": "./folder/to/MyComponentTemplate.js"
+      "template": "./folder/to/MyComponentTemplate.txt"
     },
     {
       "file": "MyComponent.md",
@@ -115,3 +116,28 @@ FolderB/
 FolderC/
 ```
 
+## Inserting variables
+
+In this section will be described how to insert variables into exported files and config file.
+
+To set the variables that you want to apply on files, you can pass them in two ways:
+
+The first way, you can set the variable through command line, using the `--` prefix before each one, as any other argument:
+
+```
+simple-template-gen --config config.json --name MyComponent --type Sometype 
+```
+
+The other way is to create a JSON file and describe the variables on it, as you can see below:
+
+```json
+// variables.json
+
+{ 
+  "name": "MyComponent",
+  "type": "Sometype"
+}
+```
+```
+simple-template-gen --config config.json --variables variables.json
+```
