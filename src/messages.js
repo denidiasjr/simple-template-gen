@@ -13,7 +13,7 @@ Repository: https://github.com/denidiasjr/simple-template-gen
 
 const NO_CONFIG_ARG = "ERROR: Missing --config parameter with .json file."
 
-module.exports = {
+export {
   HELP_MESSAGE,
   NO_CONFIG_ARG
 }

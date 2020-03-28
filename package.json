@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/denidiasjr/simple-template-gen#readme",
   "dependencies": {
+    "esm": "^3.2.25",
     "minimist": "^1.2.2"
   }
 }

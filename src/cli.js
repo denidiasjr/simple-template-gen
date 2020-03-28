@@ -1,10 +1,10 @@
-const minimist = require('minimist');
-const fs = require('fs');
-const path = require('path');
-const {
+import minimist from 'minimist';
+import fs from 'fs';
+import path from 'path';
+import {
   HELP_MESSAGE,
   NO_CONFIG_ARG
-} = require('./messages')
+} from './messages'
 let variables;
 
 function cli(args) {
@@ -123,4 +123,4 @@ function getVariables(cliArgs) {
   }
 }
 
-module.exports = cli;
+export default cli;
