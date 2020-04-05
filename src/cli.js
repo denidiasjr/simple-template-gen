@@ -1,126 +1,98 @@
-import minimist from 'minimist';
 import fs from 'fs';
 import path from 'path';
 import {
   HELP_MESSAGE,
   NO_CONFIG_ARG
 } from './messages'
-let variables;
 
-function cli(args) {
+class CLI {
 
-  // Read template arguments
-  const cliArgs = minimist(args.slice(2));
-  variables = getVariables(cliArgs);
+  constructor(options) {
 
-  // Show help message
-  if (cliArgs.help) {
-    return console.log(HELP_MESSAGE);
-  }
-
-  // If there is no --config argument, show error
-  if (!cliArgs.config) {
-    return console.log(NO_CONFIG_ARG)
-  }
-
-  // Read JSON file   
-  const configPath = path.resolve(cliArgs.config);
-
-  let configFile;
-  try {
-    configFile = JSON.parse(fs.readFileSync(configPath));
-  } catch (err) {
-    return console.log(`ERROR: ${err.message}`);
-  }
-
-  // Read and create structure
-  const jsonStructure = Array.isArray(configFile) ? configFile : [configFile];
-  const outputPath = path.resolve(cliArgs.output || '.');
-  jsonStructure.forEach(structure => createStructure(outputPath, structure))
-}
-
-function convertName(name, variables) {
-  return Object.entries(variables).reduce((accum, [key, value]) => accum.replace(`--${key}`, value), name);
-}
-
-function createStructure(outputPath, jsonStructure) {
-
-  if (jsonStructure.folder) {
-
-    const folderName = convertName(jsonStructure.folder, variables);
-    const newFolderPath = path.join(outputPath, folderName);
-    if (!fs.existsSync(newFolderPath)) {
-      fs.mkdirSync(newFolderPath);
+    if (!options) {
+      return;
     }
 
-    if (jsonStructure.files) {
-      createFiles(newFolderPath, jsonStructure.files);
+    this.instance = options;
+    this._init();
+  }
+
+  _init() {
+    this._checkHelp();
+    this.instance.variables = this._initVariables();
+    this.instance.config = this._initConfig();
+    this.instance.output = this._initOutput();
+  }
+
+  _checkHelp() {
+
+    // Show help message
+    if (this.instance.help) {
+      console.log(HELP_MESSAGE);
+      process.exit();
     }
   }
 
-  if (jsonStructure.file) {
-    createFiles(outputPath, [jsonStructure]);
-  }
-}
+  _initVariables() {
 
-function createFiles(outputPath, files) {
-
-  if (!Array.isArray(files)) {
-    return;
-  }
-
-  files.forEach(file => {
-
-    if (file.folder) {
-      createStructure(outputPath, file);
+    if (!this.instance.variables) {
+      return this.instance;
     }
 
-    if (file.file) {
-
-      const fileContent = getTemplate(file.template);
-
-      const fileName = convertName(file.file, variables);
-      const outputFile = path.join(outputPath, fileName);
-      fs.writeFileSync(outputFile, fileContent);
+    try {
+      return JSON.parse(fs.readFileSync(this.instance.variables));
+    } catch (err) {
+      console.log(`WARNING: ${err.message}`);
+      return this.instance;
     }
-  });
-}
-
-function getTemplate(templateFolder) {
-
-  if (!templateFolder) {
-    return '';
   }
 
-  const templatePath = path.resolve(templateFolder);
-  let template;
+  _initConfig() {
 
-  try {
-    template = require(templatePath);
-
-    if (typeof template === 'function') {
-      template = template(variables);
+    // If there is no --config argument, show error
+    if (!this.instance.config) {
+      console.log(NO_CONFIG_ARG);
+      process.exit();
     }
 
-  } catch (err) {
-    template = fs.readFileSync(templatePath);
+    const configPath = path.resolve(this.instance.config);
+
+    let configFile;
+    try {
+      configFile = JSON.parse(fs.readFileSync(configPath));
+    } catch (err) {
+      console.log(`ERROR: ${err.message}`);
+      process.exit();
+    }
+
+    // Read and create structure
+    return Array.isArray(configFile) ? configFile : [configFile];
   }
 
-  return template;
+  _initOutput() {
+    return path.resolve(this.instance.output || '.');
+  }
+
+  set options(options) {
+    this.instance = options || {};
+    this._init();
+  }
+
+  get variables() {
+    return this.instance.variables;
+  }
+
+  get help() {
+    return this.instance.help;
+  }
+
+  get config() {
+    return this.instance.config;
+  }
+
+  get output() {
+    return this.instance.output;
+  }
 }
 
-function getVariables(cliArgs) {
-
-  if (!cliArgs.variables) {
-    return cliArgs;
-  }
-
-  try {
-    return JSON.parse(fs.readFileSync(cliArgs.variables));
-  } catch (err) {
-    console.log(`WARNING: ${err.message}`);
-    return cliArgs
-  }
-}
-
-export default cli;
+export default CLI;

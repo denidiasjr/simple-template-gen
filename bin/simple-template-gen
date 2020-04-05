@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
 require = require("esm")(module)
-const cli = require('../src/cli').default;
-module.exports = cli(process.argv)
+const main = require('../src/').default;
+module.exports = main(process.argv)
